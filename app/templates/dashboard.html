@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Your To-Do List</h2>
+{% for todo in todos %}
+    <div class="todo-item">
+        <strong>{{ todo.title }}</strong>
+        {% if todo.completed %} ✅ {% endif %}
+        <div>{{ todo.description }}</div>
+        <div class="todo-actions">
+            <a href="{{ url_for('main.edit', id=todo.id) }}">Edit</a> |
+            <a href="{{ url_for('main.delete', id=todo.id) }}">Delete</a>
+        </div>
+    </div>
+{% else %}
+    <p>No tasks yet. <a href="{{ url_for('main.add') }}">Add one</a>!</p>
+{% endfor %}
+{% endblock %}
